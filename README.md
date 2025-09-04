@@ -33,22 +33,6 @@ You can view the live portfolio here:
 
 ------
 
-## 📂 Folder Structure
-
-Navin-Portfolio/
-│
-├─ public/          # Static assets
-├─ src/             # Source code
-│  ├─ assets/       # Images and media
-│  ├─ components/   # React components
-│  ├─ App.tsx       # Main app component
-│  └─ main.tsx      # Entry point
-├─ package.json
-├─ tsconfig.json
-└─ vite.config.ts
-
-------
-
 ## 🚀 Getting Started
 
 ### Prerequisites
