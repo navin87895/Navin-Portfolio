@@ -29,8 +29,7 @@ It showcases my projects, skills, and experience as a web developer.
 ## 🌄 Live Demo
 
 You can view the live portfolio here:  
-[[https://
-navin-portfolio-five.vercel.app/))
+[https://navin-portfolio-five.vercel.app/](https://navin-portfolio-five.vercel.app/)
 
 ------
 
