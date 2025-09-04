@@ -1,69 +1,78 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Navin Portfolio
 
-Currently, two official plugins are available:
+This is my personal portfolio website built using **Vite**, **React**, **TypeScript + SWC**, and **Tailwind CSS**.  
+It showcases my projects, skills, and experience as a web developer.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🔧 Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React** – Front-end library for building UI components  
+- **TypeScript + SWC** – Type-safe JavaScript with fast compilation  
+- **Vite** – Next-generation front-end tooling  
+- **Tailwind CSS** – Utility-first CSS framework for styling  
+- **Git & GitHub** – Version control and project hosting  
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## ⚡ Features
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Responsive design for desktop and mobile  
+- Animated components and typewriter effect  
+- Sections for **About**, **Skills**, **Projects**, and **Experience**  
+- Easy to extend with new projects or skills  
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🌄 Live Demo
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+You can view the live portfolio here:  
+[https://navin87895.github.io/Navin-Portfolio](https://navin87895.github.io/Navin-Portfolio)
+
+------
+
+## 📂 Folder Structure
+
+Navin-Portfolio/
+│
+├─ public/          # Static assets
+├─ src/             # Source code
+│  ├─ assets/       # Images and media
+│  ├─ components/   # React components
+│  ├─ App.tsx       # Main app component
+│  └─ main.tsx      # Entry point
+├─ package.json
+├─ tsconfig.json
+└─ vite.config.ts
+
+------
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js installed ([Download Node.js](https://nodejs.org/))  
+- Git installed ([Download Git](https://git-scm.com/))  
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   
+   git clone https://github.com/navin87895/Navin-Portfolio.git
+   
+2. Navigate to the project folder:
+
+cd Navin-Portfolio
+
+3. Install dependencies:
+
+npm install
+
+4.Start the development server:
+
+npm run dev
+
+5.Open the URL shown in the terminal (usually http://localhost:5173) to view the portfolio.
