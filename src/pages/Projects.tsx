@@ -1,14 +1,14 @@
-// src/pages/Projects.tsx
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, easeOut } from "framer-motion";
+import type { Variants } from "framer-motion";
 
 const Projects: React.FC = () => {
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: (index: number) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: index * 0.2, duration: 0.6, ease: "easeOut" },
+      transition: { delay: index * 0.2, duration: 0.6, ease: easeOut },
     }),
   };
 
@@ -23,7 +23,7 @@ const Projects: React.FC = () => {
       title: "Advanced E-Voting System",
       tech: ["PHP", "MySQL", "HTML", "CSS"],
       desc: "Created a secure online voting system with authentication and database integration.",
-      github: "https://github.com/navin87895"
+      github: "https://github.com/navin87895",
     },
     {
       title: "Notes Management Website",
@@ -79,7 +79,7 @@ const Projects: React.FC = () => {
               {project.tech.join(", ")}
             </p>
             <p className="text-gray-300 mb-3">{project.desc}</p>
-            {project.github !== "#" && (
+            {project.github && (
               <a
                 href={project.github}
                 target="_blank"

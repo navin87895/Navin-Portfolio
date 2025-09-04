@@ -1,16 +1,37 @@
-// src/pages/Education.tsx
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, easeOut } from "framer-motion";
+import type { Variants } from "framer-motion";
 
 const Education: React.FC = () => {
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: (index: number) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: index * 0.2, duration: 0.6, ease: "easeOut" },
+      transition: { delay: index * 0.2, duration: 0.6, ease: easeOut },
     }),
   };
+
+  const educationList = [
+    {
+      img: "/galgotias.png",
+      title: "Galgotias University",
+      period: "B.Tech CSE (2021 - 2025)",
+      desc: "Pursued a Bachelor’s degree in Computer Science Engineering, building strong foundations in software development, problem-solving, and full-stack projects.",
+    },
+    {
+      img: "/mrjdi.png",
+      title: "MRJDI College",
+      period: "12th Science (2018 - 2020)",
+      desc: "Completed Higher Secondary Education with focus on Science and Mathematics.",
+    },
+    {
+      img: "/stpaul.png",
+      title: "St. Paul Sr. Sec. School",
+      period: "10th (2016 - 2018)",
+      desc: "Completed Secondary Education with a strong academic foundation.",
+    },
+  ];
 
   return (
     <section id="education" className="bg-[#0f0f1a] text-white px-6 py-16">
@@ -37,26 +58,7 @@ const Education: React.FC = () => {
 
       {/* Education List */}
       <div className="max-w-4xl mx-auto space-y-8">
-        {[
-          {
-            img: "/galgotias.png",
-            title: "Galgotias University",
-            period: "B.Tech CSE (2021 - 2025)",
-            desc: "Pursued a Bachelor’s degree in Computer Science Engineering, building strong foundations in software development, problem-solving, and full-stack projects.",
-          },
-          {
-            img: "/mrjdi.png",
-            title: "MRJDI College",
-            period: "12th Science (2018 - 2020)",
-            desc: "Completed Higher Secondary Education with focus on Science and Mathematics.",
-          },
-          {
-            img: "/stpaul.png",
-            title: "St. Paul Sr. Sec. School",
-            period: "10th (2016 - 2018)",
-            desc: "Completed Secondary Education with a strong academic foundation.",
-          },
-        ].map((edu, index) => (
+        {educationList.map((edu, index) => (
           <motion.div
             key={edu.title}
             className="bg-gray-800 p-6 rounded-2xl shadow-lg flex items-center gap-6 border border-gray-700"
@@ -68,7 +70,7 @@ const Education: React.FC = () => {
             whileHover={{
               scale: 1.05,
               boxShadow: "0px 0px 20px rgba(168, 85, 247, 0.5)",
-              borderColor: "rgb(168, 85, 247)", // purple-500 glow
+              borderColor: "rgb(168, 85, 247)",
             }}
             transition={{ type: "spring", stiffness: 200, damping: 12 }}
           >

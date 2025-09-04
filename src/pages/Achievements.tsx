@@ -1,13 +1,14 @@
-import { motion } from "framer-motion";
+import { motion, easeOut } from "framer-motion";
+import type { Variants } from "framer-motion";
 import React from "react";
 
 const Achievements: React.FC = () => {
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: (index: number) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: index * 0.2, duration: 0.6, ease: "easeOut" },
+      transition: { delay: index * 0.2, duration: 0.6, ease: easeOut },
     }),
   };
 

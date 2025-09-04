@@ -1,6 +1,6 @@
-// src/pages/Experience.tsx
-import { motion, Variants } from "framer-motion";
 import React from "react";
+import { motion, easeOut } from "framer-motion";
+import type { Variants } from "framer-motion";
 
 const Experience: React.FC = () => {
   const cardVariants: Variants = {
@@ -8,7 +8,7 @@ const Experience: React.FC = () => {
     visible: (custom: number) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: custom * 0.2, duration: 0.6, ease: "easeOut" },
+      transition: { delay: custom * 0.2, duration: 0.6, ease: easeOut },
     }),
   };
 
@@ -32,7 +32,6 @@ const Experience: React.FC = () => {
 
   return (
     <section id="experience" className="bg-[#0f0f1a] text-white px-6 py-16">
-      {/* Title */}
       <motion.h2
         className="text-4xl font-bold text-center mb-12"
         initial={{ opacity: 0, y: -30 }}
@@ -42,7 +41,6 @@ const Experience: React.FC = () => {
         Experience
       </motion.h2>
 
-      {/* Experience Cards */}
       <div className="max-w-4xl mx-auto space-y-8">
         {experiences.map((exp, index) => (
           <motion.div
@@ -56,7 +54,7 @@ const Experience: React.FC = () => {
             whileHover={{
               scale: 1.05,
               boxShadow: "0px 0px 20px rgba(168, 85, 247, 0.5)",
-              borderColor: "rgb(168, 85, 247)", // purple-500 glow
+              borderColor: "rgb(168, 85, 247)",
             }}
             transition={{ type: "spring", stiffness: 200, damping: 12 }}
           >
