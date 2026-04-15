@@ -16,7 +16,7 @@ const Experience: React.FC = () => {
     {
       img: "/logos/xietus.png",
       title: "Software Developer Intern - Xietus Lab",
-      period: "Sep 2025 - Present",
+      period: "Sep 2025 - March 2026",
       desc: "Developed and maintained dynamic web applications using front-end and back-end technologies, integrating databases and APIs, debugging scalable solutions, and writing clean, well-documented code to ensure performance, reliability, and collaboration.",
       skills:
         "React.js, Node.js, Express.js, Software Construction, Web Infrastructure, Software Testing & Debugging",
