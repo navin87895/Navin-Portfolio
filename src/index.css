@@ -4,12 +4,18 @@
   html {
     scroll-behavior: smooth;
     color-scheme: dark;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   }
 
   body {
-    background-color: #0b0b14;
+    background-color: #080811;
     color: #f3f4f6;
     overflow-x: hidden;
+  }
+
+  /* Code font utility */
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
   }
 
   /* Sleek Purple Custom Scrollbar */
@@ -17,7 +23,7 @@
     width: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: #090912;
+    background: #06060c;
   }
   ::-webkit-scrollbar-thumb {
     background: linear-gradient(to bottom, #9333ea, #ec4899);
@@ -28,31 +34,52 @@
   }
 }
 
-/* Custom Utilities for God-Level UI */
-@keyframes float {
+/* Subtlest background grid texture pattern */
+.bg-grid-pattern {
+  background-image: radial-gradient(rgba(147, 51, 234, 0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Keyframe Animations */
+@keyframes floatSlow {
   0%, 100% {
-    transform: translateY(0px);
+    transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-8px);
+    transform: translateY(-12px) rotate(1deg);
   }
 }
 
 @keyframes pulseGlow {
   0%, 100% {
-    opacity: 0.3;
+    opacity: 0.35;
     transform: scale(1);
   }
   50% {
-    opacity: 0.7;
-    transform: scale(1.04);
+    opacity: 0.75;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
   }
 }
 
 .animate-float {
-  animation: float 4s ease-in-out infinite;
+  animation: floatSlow 5s ease-in-out infinite;
 }
 
 .animate-pulse-glow {
-  animation: pulseGlow 5s ease-in-out infinite;
+  animation: pulseGlow 6s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
 }

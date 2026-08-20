@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { Link } from "react-scroll";
-import { Code2, ArrowUpRight } from "lucide-react";
+import { Code2, ArrowUpRight, Sparkles } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,11 +24,11 @@ const Navbar = () => {
   const navItems = [
     { to: "landing", label: "About" },
     { to: "services", label: "Services" },
+    { to: "workflow", label: "Process" },
     { to: "skills", label: "Skills" },
     { to: "experience", label: "Experience" },
     { to: "projects", label: "Projects" },
     { to: "achievements", label: "Achievements" },
-    { to: "education", label: "Education" },
     { to: "contact", label: "Contact" },
   ];
 
@@ -36,7 +36,7 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#0b0b14]/90 backdrop-blur-xl border-b border-purple-500/20 py-3 shadow-2xl shadow-purple-950/20"
+          ? "bg-[#080811]/90 backdrop-blur-2xl border-b border-purple-500/20 py-3 shadow-2xl shadow-purple-950/20"
           : "bg-transparent py-5"
       }`}
     >
@@ -47,17 +47,17 @@ const Navbar = () => {
           smooth={true}
           duration={600}
           offset={-80}
-          className="cursor-pointer group flex items-center gap-2"
+          className="cursor-pointer group flex items-center gap-2.5"
         >
           <div className="p-2 rounded-xl bg-purple-600/10 border border-purple-500/30 group-hover:border-purple-500/80 transition duration-300">
             <Code2 className="w-5 h-5 text-purple-400 group-hover:rotate-12 transition transform" />
           </div>
-          <span className="text-xl font-extrabold tracking-tight text-white">
+          <span className="text-xl font-extrabold tracking-tight text-white font-mono">
             Navin<span className="text-purple-400">.dev</span>
           </span>
         </Link>
 
-        {/* Desktop Navigation Links */}
+        {/* Desktop Navigation Bar */}
         <div className="hidden lg:flex items-center gap-1 bg-gray-900/60 border border-gray-800/80 backdrop-blur-xl px-4 py-1.5 rounded-full shadow-inner">
           {navItems.map((item) => (
             <Link
@@ -75,7 +75,7 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* GitHub / Action Buttons */}
+        {/* Action Buttons */}
         <div className="hidden sm:flex items-center gap-3">
           <a
             href="https://github.com/navin87895"
@@ -91,13 +91,14 @@ const Navbar = () => {
             smooth={true}
             duration={600}
             offset={-80}
-            className="cursor-pointer px-4 py-2 text-xs font-bold text-white bg-gradient-to-r from-purple-600 to-pink-600 rounded-full hover:shadow-lg hover:shadow-purple-600/30 transition transform hover:-translate-y-0.5"
+            className="cursor-pointer px-4 py-2 text-xs font-bold text-white bg-gradient-to-r from-purple-600 to-pink-600 rounded-full hover:shadow-lg hover:shadow-purple-600/30 transition transform hover:-translate-y-0.5 flex items-center gap-1.5"
           >
-            Hire Me
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Hire Me</span>
           </Link>
         </div>
 
-        {/* Mobile Hamburger Menu Toggle */}
+        {/* Mobile Hamburger Button */}
         <div className="lg:hidden flex items-center">
           <button
             onClick={toggleMenu}
@@ -111,7 +112,7 @@ const Navbar = () => {
 
       {/* Mobile Drawer Menu */}
       {isOpen && (
-        <div className="lg:hidden px-4 pt-3 pb-6 bg-[#0b0b14]/95 backdrop-blur-2xl border-b border-gray-800 shadow-2xl">
+        <div className="lg:hidden px-4 pt-3 pb-6 bg-[#080811]/95 backdrop-blur-2xl border-b border-gray-800 shadow-2xl">
           <div className="flex flex-col space-y-2 max-w-md mx-auto">
             {navItems.map((item) => (
               <Link
