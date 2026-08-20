@@ -2,8 +2,9 @@ import React from "react";
 import { Typewriter } from "react-simple-typewriter";
 import { motion } from "framer-motion";
 import { Link } from "react-scroll";
-import { Briefcase, Code, Sparkles, CheckCircle2 } from "lucide-react";
+import { Briefcase, Code, Sparkles, CheckCircle2, ArrowDown } from "lucide-react";
 import profilePic from "../assets/profile.jpg";
+import TerminalWidget from "../components/TerminalWidget";
 
 const Landing: React.FC = () => {
   const stats = [
@@ -18,15 +19,15 @@ const Landing: React.FC = () => {
       id="landing"
       className="bg-[#0f0f1a] text-white px-4 sm:px-6 md:px-12 pt-28 pb-20 relative overflow-hidden"
     >
-      {/* Glow Orbs Background */}
+      {/* Background Neon Orbs */}
       <div className="absolute top-10 right-10 w-96 h-96 bg-purple-600/15 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 left-10 w-96 h-96 bg-pink-600/15 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="flex flex-col-reverse md:flex-row items-center gap-12 lg:gap-16">
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
           {/* Left Content */}
           <motion.div
-            className="text-center md:text-left space-y-6 flex-1"
+            className="text-center lg:text-left space-y-6 flex-1"
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
@@ -69,7 +70,7 @@ const Landing: React.FC = () => {
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap justify-center md:justify-start gap-4 pt-2">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-4 pt-2">
               <Link
                 to="contact"
                 smooth={true}
@@ -90,22 +91,25 @@ const Landing: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Right Image */}
+          {/* Right Section: Profile Image + Interactive Terminal */}
           <motion.div
-            className="flex justify-center md:justify-end flex-1 mb-4 md:mb-0 relative"
-            initial={{ opacity: 0, scale: 0.8 }}
+            className="flex flex-col items-center justify-center lg:items-end flex-1 w-full gap-8"
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7 }}
           >
-            <div className="relative">
-              {/* Animated Glow Backdrop Behind Image */}
-              <div className="absolute -inset-1.5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full blur-xl opacity-75 animate-pulse" />
+            {/* Profile Avatar */}
+            <div className="relative group">
+              <div className="absolute -inset-2 bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 rounded-full blur-xl opacity-75 group-hover:opacity-100 transition duration-500 animate-pulse" />
               <img
                 src={profilePic}
                 alt="Navin Kumar"
-                className="relative rounded-full w-52 h-52 sm:w-64 sm:h-64 md:w-80 md:h-80 object-cover border-4 border-purple-400/80 shadow-2xl"
+                className="relative rounded-full w-44 h-44 sm:w-52 sm:h-52 md:w-56 md:h-56 object-cover border-4 border-purple-400/80 shadow-2xl transition transform group-hover:scale-105"
               />
             </div>
+
+            {/* IDE Developer Terminal Widget */}
+            <TerminalWidget />
           </motion.div>
         </div>
 
@@ -117,9 +121,10 @@ const Landing: React.FC = () => {
           transition={{ delay: 0.4, duration: 0.6 }}
         >
           {stats.map((stat, i) => (
-            <div
+            <motion.div
               key={i}
-              className="bg-gray-900/60 backdrop-blur-xl border border-gray-800 p-4 sm:p-5 rounded-2xl flex items-center gap-3.5 hover:border-purple-500/40 transition"
+              whileHover={{ y: -4, borderColor: "rgba(168, 85, 247, 0.6)" }}
+              className="bg-gray-900/60 backdrop-blur-xl border border-gray-800 p-4 sm:p-5 rounded-2xl flex items-center gap-3.5 hover:shadow-lg hover:shadow-purple-500/10 transition"
             >
               <div className="p-3 rounded-xl bg-gray-800/80 border border-gray-700/50">
                 {stat.icon}
@@ -128,9 +133,22 @@ const Landing: React.FC = () => {
                 <h4 className="text-lg sm:text-xl font-bold text-white">{stat.count}</h4>
                 <p className="text-xs sm:text-sm text-gray-400">{stat.label}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
+      </div>
+
+      {/* Animated Scroll Indicator */}
+      <div className="flex justify-center mt-12">
+        <Link
+          to="services"
+          smooth={true}
+          duration={600}
+          offset={-70}
+          className="cursor-pointer p-2 rounded-full bg-purple-950/40 border border-purple-500/30 text-purple-400 hover:text-white hover:bg-purple-600 transition animate-bounce"
+        >
+          <ArrowDown className="w-5 h-5" />
+        </Link>
       </div>
     </section>
   );

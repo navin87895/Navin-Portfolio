@@ -1,6 +1,7 @@
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Services from "./components/Services";
+import ParticleBackground from "./components/ParticleBackground";
 import Achievements from "./pages/Achievements";
 import Contact from "./pages/Contact";
 import Education from "./pages/Education";
@@ -11,7 +12,10 @@ import Skills from "./pages/Skills";
 
 const App = () => {
   return (
-    <div className="bg-[#0f0f1a] min-h-screen text-white font-sans selection:bg-purple-500 selection:text-white">
+    <div className="bg-[#0f0f1a] min-h-screen text-white font-sans selection:bg-purple-500 selection:text-white relative">
+      {/* Dynamic Animated Particle Canvas Background */}
+      <ParticleBackground />
+
       <Navbar />
 
       {/* Sections */}
