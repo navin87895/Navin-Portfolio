@@ -1,8 +1,18 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Code2, Server, Layout, Wrench } from "lucide-react";
 
 const Services: React.FC = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Parallax layers
+  const bgOrbY = useTransform(scrollYProgress, [0, 1], ["-100px", "100px"]);
+  const headerY = useTransform(scrollYProgress, [0, 1], ["-30px", "20px"]);
+
   const services = [
     {
       icon: <Code2 className="w-10 h-10 text-purple-400" />,
@@ -31,13 +41,24 @@ const Services: React.FC = () => {
   ];
 
   return (
-    <section id="services" className="bg-[#0f0f1a] text-white px-6 py-20 relative overflow-hidden">
-      {/* Background Neon Light Orbs */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-pink-600/10 rounded-full blur-3xl pointer-events-none" />
+    <section
+      ref={sectionRef}
+      id="services"
+      className="bg-[#0f0f1a] text-white px-6 py-20 relative overflow-hidden"
+    >
+      {/* Background Parallax Light Orbs */}
+      <motion.div
+        style={{ y: bgOrbY }}
+        className="absolute top-1/2 left-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2"
+      />
+      <motion.div
+        style={{ y: bgOrbY }}
+        className="absolute bottom-0 right-0 w-96 h-96 bg-pink-600/10 rounded-full blur-3xl pointer-events-none"
+      />
 
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
+          style={{ y: headerY }}
           className="text-center mb-16"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
