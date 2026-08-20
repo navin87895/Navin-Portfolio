@@ -1,5 +1,6 @@
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import Services from "./components/Services";
 import Achievements from "./pages/Achievements";
 import Contact from "./pages/Contact";
 import Education from "./pages/Education";
@@ -10,12 +11,16 @@ import Skills from "./pages/Skills";
 
 const App = () => {
   return (
-    <div>
+    <div className="bg-[#0f0f1a] min-h-screen text-white font-sans selection:bg-purple-500 selection:text-white">
       <Navbar />
 
       {/* Sections */}
       <section id="landing" className="scroll-mt-24">
         <Landing />
+      </section>
+
+      <section id="services" className="scroll-mt-24">
+        <Services />
       </section>
 
       <section id="skills" className="scroll-mt-24">
@@ -30,7 +35,6 @@ const App = () => {
         <Projects />
       </section>
 
-      {/* Achievements comes before Education now */}
       <section id="achievements" className="scroll-mt-24">
         <Achievements />
       </section>

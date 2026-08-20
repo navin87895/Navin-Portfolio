@@ -1,65 +1,136 @@
 import React from "react";
 import { Typewriter } from "react-simple-typewriter";
+import { motion } from "framer-motion";
+import { Link } from "react-scroll";
+import { Briefcase, Code, Sparkles, CheckCircle2 } from "lucide-react";
 import profilePic from "../assets/profile.jpg";
 
 const Landing: React.FC = () => {
+  const stats = [
+    { icon: <Code className="w-5 h-5 text-purple-400" />, count: "15+", label: "Projects Completed" },
+    { icon: <Briefcase className="w-5 h-5 text-pink-400" />, count: "2+", label: "Years Tech Exp." },
+    { icon: <Sparkles className="w-5 h-5 text-indigo-400" />, count: "Full-Stack", label: "MERN Specialist" },
+    { icon: <CheckCircle2 className="w-5 h-5 text-emerald-400" />, count: "100%", label: "Client Satisfaction" },
+  ];
+
   return (
     <section
       id="landing"
-      className="bg-[#0f0f1a] text-white px-4 sm:px-6 md:px-12 pt-28 pb-16"
+      className="bg-[#0f0f1a] text-white px-4 sm:px-6 md:px-12 pt-28 pb-20 relative overflow-hidden"
     >
-      <div className="flex flex-col-reverse md:flex-row items-center max-w-7xl mx-auto gap-12 lg:gap-20">
-        {/* Left Content */}
-        <div className="text-center md:text-left space-y-4 flex-1">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">
-            Hi, I am
-          </h2>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white">
-            Navin Kumar
-          </h1>
-          <h3 className="text-lg sm:text-xl md:text-2xl font-semibold">
-            I am a{" "}
-            <span className="text-purple-500">
-              <Typewriter
-                words={["Full-Stack Developer", "Programmer", "Web Enthusiast"]}
-                loop={0}
-                cursor
-                cursorStyle="|"
-                typeSpeed={80}
-                deleteSpeed={60}
-                delaySpeed={1200}
+      {/* Glow Orbs Background */}
+      <div className="absolute top-10 right-10 w-96 h-96 bg-purple-600/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 left-10 w-96 h-96 bg-pink-600/15 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="flex flex-col-reverse md:flex-row items-center gap-12 lg:gap-16">
+          {/* Left Content */}
+          <motion.div
+            className="text-center md:text-left space-y-6 flex-1"
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7 }}
+          >
+            {/* Status Pill */}
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs sm:text-sm font-medium">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+              <span>Available for Freelance Projects & Full-time Roles</span>
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
+              Hi, I am <br />
+              <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-indigo-400 bg-clip-text text-transparent">
+                Navin Kumar
+              </span>
+            </h1>
+
+            <h3 className="text-xl sm:text-2xl font-semibold text-gray-200">
+              I am a{" "}
+              <span className="text-purple-400 border-b-2 border-purple-500/50 pb-0.5">
+                <Typewriter
+                  words={[
+                    "Freelance Web Developer",
+                    "Full-Stack MERN Engineer",
+                    "UI/UX Enthusiast",
+                    "Problem Solver",
+                  ]}
+                  loop={0}
+                  cursor
+                  cursorStyle="|"
+                  typeSpeed={70}
+                  deleteSpeed={50}
+                  delaySpeed={1200}
+                />
+              </span>
+            </h3>
+
+            <p className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl">
+              Experienced Full-Stack Developer specializing in modern MERN web applications, scalable REST APIs, and responsive custom solutions for freelance clients and companies.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap justify-center md:justify-start gap-4 pt-2">
+              <Link
+                to="contact"
+                smooth={true}
+                duration={600}
+                offset={-70}
+                className="px-7 py-3.5 text-base font-semibold rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white shadow-lg shadow-purple-600/30 hover:shadow-purple-600/50 cursor-pointer transition transform hover:-translate-y-0.5"
+              >
+                Hire Me for Freelance 🚀
+              </Link>
+              <a
+                href="/Navin-resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-7 py-3.5 text-base font-semibold rounded-full border border-purple-500/50 bg-purple-950/20 hover:bg-purple-900/40 text-purple-200 transition"
+              >
+                Check Resume 📄
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Right Image */}
+          <motion.div
+            className="flex justify-center md:justify-end flex-1 mb-4 md:mb-0 relative"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className="relative">
+              {/* Animated Glow Backdrop Behind Image */}
+              <div className="absolute -inset-1.5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full blur-xl opacity-75 animate-pulse" />
+              <img
+                src={profilePic}
+                alt="Navin Kumar"
+                className="relative rounded-full w-52 h-52 sm:w-64 sm:h-64 md:w-80 md:h-80 object-cover border-4 border-purple-400/80 shadow-2xl"
               />
-            </span>
-          </h3>
-          <p className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed">
-            I am a B.Tech graduate with a strong foundation in computer science
-            and hands-on experience in full-stack web development. I enjoy
-            tackling complex challenges, solving problems, and continuously
-            enhancing my technical skills. I’m passionate about building
-            impactful projects and contributing effectively to innovative teams.
-          </p>
+            </div>
+          </motion.div>
+        </div>
 
-          {/* Buttons */}
-          <div className="flex flex-wrap justify-center md:justify-start gap-4 pt-2">
-            <a
-              href="/Navin-resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 text-base rounded-full bg-purple-600 hover:bg-purple-700 transition"
+        {/* Floating Quick Stats */}
+        <motion.div
+          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+        >
+          {stats.map((stat, i) => (
+            <div
+              key={i}
+              className="bg-gray-900/60 backdrop-blur-xl border border-gray-800 p-4 sm:p-5 rounded-2xl flex items-center gap-3.5 hover:border-purple-500/40 transition"
             >
-              Check Resume
-            </a>
-          </div>
-        </div>
-
-        {/* Right Image */}
-        <div className="flex justify-center md:justify-end flex-1 mb-6 md:mb-0">
-          <img
-            src={profilePic}
-            alt="Navin Kumar"
-            className="rounded-full w-44 h-44 sm:w-56 sm:h-56 md:w-72 md:h-72 object-cover border-4 border-purple-500 shadow-lg"
-          />
-        </div>
+              <div className="p-3 rounded-xl bg-gray-800/80 border border-gray-700/50">
+                {stat.icon}
+              </div>
+              <div>
+                <h4 className="text-lg sm:text-xl font-bold text-white">{stat.count}</h4>
+                <p className="text-xs sm:text-sm text-gray-400">{stat.label}</p>
+              </div>
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
