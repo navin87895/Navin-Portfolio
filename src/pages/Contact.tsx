@@ -4,42 +4,39 @@ import emailjs from "@emailjs/browser";
 
 const Contact: React.FC = () => {
   const form = useRef<HTMLFormElement | null>(null);
+  const [isSending, setIsSending] = React.useState(false);
+  const [statusMessage, setStatusMessage] = React.useState<{ type: "success" | "error"; text: string } | null>(null);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!form.current) return;
+    if (!form.current || isSending) return;
 
-    // 1️⃣ Send to ADMIN
-    emailjs
-      .sendForm(
-        "service_vd5v0ky",
-        "template_t52dzpb", // admin template
-        form.current,
-        "pVDpBpA9_KYxC5MRg"
-      )
-      .then(
-        () => console.log("Message sent to admin"),
-        (error) => console.error("Error sending to admin:", error.text)
-      );
+    setIsSending(true);
+    setStatusMessage(null);
 
-    // 2️⃣ Send AUTO-REPLY to USER
-    emailjs
-      .sendForm(
-        "service_vd5v0ky",
-        "template_g05966b", // user template
-        form.current,
-        "pVDpBpA9_KYxC5MRg"
-      )
-      .then(
-        () => {
-          alert("✅ Message sent & auto-reply delivered!");
-          form.current?.reset();
-        },
-        (error) => {
-          console.error("Error sending auto-reply:", error.text);
-          alert("❌ Error sending auto-reply: " + error.text);
-        }
-      );
+    const serviceId = "service_vd5v0ky";
+    const adminTemplateId = "template_t52dzpb";
+    const userTemplateId = "template_g05966b";
+    const publicKey = "pVDpBpA9_KYxC5MRg";
+
+    try {
+      // 1️⃣ Send to ADMIN
+      await emailjs.sendForm(serviceId, adminTemplateId, form.current, publicKey);
+      console.log("Message sent to admin");
+
+      // 2️⃣ Send AUTO-REPLY to USER
+      await emailjs.sendForm(serviceId, userTemplateId, form.current, publicKey);
+      console.log("Auto-reply delivered");
+
+      setStatusMessage({ type: "success", text: "✅ Message sent & auto-reply delivered!" });
+      form.current.reset();
+    } catch (error: any) {
+      console.error("Error sending email via EmailJS:", error);
+      const errDetail = error?.text || error?.message || "Failed to send email. Please try again.";
+      setStatusMessage({ type: "error", text: `❌ Error sending email: ${errDetail}` });
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -58,6 +55,18 @@ const Contact: React.FC = () => {
         className="w-full max-w-lg bg-gray-800 p-8 rounded-2xl shadow-lg space-y-4"
       >
         <h3 className="text-2xl font-semibold mb-2">Email Me 🚀</h3>
+
+        {statusMessage && (
+          <div
+            className={`p-3 rounded-lg text-sm font-medium ${
+              statusMessage.type === "success"
+                ? "bg-green-900/60 text-green-200 border border-green-500/50"
+                : "bg-red-900/60 text-red-200 border border-red-500/50"
+            }`}
+          >
+            {statusMessage.text}
+          </div>
+        )}
 
         <input
           type="email"
@@ -93,9 +102,10 @@ const Contact: React.FC = () => {
 
         <button
           type="submit"
-          className="w-full py-3 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 font-semibold hover:opacity-90 transition"
+          disabled={isSending}
+          className="w-full py-3 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 font-semibold hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Send
+          {isSending ? "Sending..." : "Send"}
         </button>
       </form>
     </section>
