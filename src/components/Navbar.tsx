@@ -1,9 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { Link } from "react-scroll";
+import { Code2, ArrowUpRight } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -19,98 +33,119 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-[#0f0f1a]/80 backdrop-blur-md border-b border-purple-500/20 text-white px-6 py-4 shadow-xl z-50 transition-all">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-[#0b0b14]/90 backdrop-blur-xl border-b border-purple-500/20 py-3 shadow-2xl shadow-purple-950/20"
+          : "bg-transparent py-5"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Logo */}
-        <h1 className="text-lg sm:text-xl md:text-2xl font-bold tracking-tight">
-          <span className="text-purple-400">&lt;</span>
-          <span className="text-white"> Navin </span>
-          <span className="text-purple-400">/&gt;</span>
-        </h1>
+        <Link
+          to="landing"
+          smooth={true}
+          duration={600}
+          offset={-80}
+          className="cursor-pointer group flex items-center gap-2"
+        >
+          <div className="p-2 rounded-xl bg-purple-600/10 border border-purple-500/30 group-hover:border-purple-500/80 transition duration-300">
+            <Code2 className="w-5 h-5 text-purple-400 group-hover:rotate-12 transition transform" />
+          </div>
+          <span className="text-xl font-extrabold tracking-tight text-white">
+            Navin<span className="text-purple-400">.dev</span>
+          </span>
+        </Link>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-6 text-sm sm:text-base md:text-base mx-auto">
+        {/* Desktop Navigation Links */}
+        <div className="hidden lg:flex items-center gap-1 bg-gray-900/60 border border-gray-800/80 backdrop-blur-xl px-4 py-1.5 rounded-full shadow-inner">
           {navItems.map((item) => (
             <Link
               key={item.to}
               to={item.to}
               smooth={true}
               duration={600}
-              offset={-70}
+              offset={-80}
               spy={true}
-              activeClass="text-purple-400 font-semibold"
-              className="cursor-pointer text-gray-300 hover:text-purple-400 transition"
+              activeClass="!text-white !bg-purple-600/30 !border-purple-500/50"
+              className="cursor-pointer text-xs font-semibold text-gray-300 hover:text-white px-3.5 py-1.5 rounded-full border border-transparent transition-all duration-200"
             >
               {item.label}
             </Link>
           ))}
         </div>
 
-        {/* GitHub / LinkedIn buttons */}
-        <div className="hidden md:flex space-x-2 sm:space-x-3">
+        {/* GitHub / Action Buttons */}
+        <div className="hidden sm:flex items-center gap-3">
           <a
             href="https://github.com/navin87895"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-3.5 py-1.5 text-xs sm:text-sm font-semibold border border-purple-500/50 bg-purple-950/30 text-purple-300 rounded-full hover:bg-purple-600 hover:text-white transition"
+            className="flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-purple-200 bg-purple-950/40 border border-purple-500/40 rounded-full hover:bg-purple-600 hover:text-white transition shadow-md"
           >
-            GitHub
+            <span>GitHub</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
           </a>
-          <a
-            href="https://linkedin.com/in/navin-kumar-b92434231"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-3.5 py-1.5 text-xs sm:text-sm font-semibold border border-purple-500/50 bg-purple-950/30 text-purple-300 rounded-full hover:bg-purple-600 hover:text-white transition"
+          <Link
+            to="contact"
+            smooth={true}
+            duration={600}
+            offset={-80}
+            className="cursor-pointer px-4 py-2 text-xs font-bold text-white bg-gradient-to-r from-purple-600 to-pink-600 rounded-full hover:shadow-lg hover:shadow-purple-600/30 transition transform hover:-translate-y-0.5"
           >
-            LinkedIn
-          </a>
+            Hire Me
+          </Link>
         </div>
 
-        {/* Hamburger Menu Button */}
-        <div className="md:hidden flex items-center">
-          <button onClick={toggleMenu}>
-            {isOpen ? (
-              <FiX size={28} className="text-white" />
-            ) : (
-              <FiMenu size={28} className="text-white" />
-            )}
+        {/* Mobile Hamburger Menu Toggle */}
+        <div className="lg:hidden flex items-center">
+          <button
+            onClick={toggleMenu}
+            aria-label="Toggle Menu"
+            className="p-2 rounded-xl bg-gray-900 border border-gray-800 text-gray-200 hover:text-white focus:outline-none"
+          >
+            {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Drawer Menu */}
       {isOpen && (
-        <div className="md:hidden mt-4 space-y-3 flex flex-col items-center bg-gray-900/95 backdrop-blur-xl border border-gray-800 rounded-2xl py-5 shadow-2xl">
-          {navItems.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              smooth={true}
-              duration={600}
-              offset={-70}
-              onClick={() => setIsOpen(false)}
-              className="cursor-pointer text-gray-200 hover:text-purple-400 text-base font-semibold"
-            >
-              {item.label}
-            </Link>
-          ))}
-          <div className="flex space-x-3 pt-2">
-            <a
-              href="https://github.com/navin87895"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-1.5 text-xs border border-purple-500/50 rounded-full hover:bg-purple-600 transition"
-            >
-              GitHub
-            </a>
-            <a
-              href="https://linkedin.com/in/navin-kumar-b92434231"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-1.5 text-xs border border-purple-500/50 rounded-full hover:bg-purple-600 transition"
-            >
-              LinkedIn
-            </a>
+        <div className="lg:hidden px-4 pt-3 pb-6 bg-[#0b0b14]/95 backdrop-blur-2xl border-b border-gray-800 shadow-2xl">
+          <div className="flex flex-col space-y-2 max-w-md mx-auto">
+            {navItems.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                smooth={true}
+                duration={600}
+                offset={-80}
+                onClick={() => setIsOpen(false)}
+                className="cursor-pointer text-gray-200 hover:text-purple-400 px-4 py-2.5 rounded-xl hover:bg-purple-950/30 text-sm font-semibold transition"
+              >
+                {item.label}
+              </Link>
+            ))}
+            <div className="flex items-center gap-3 pt-3 border-t border-gray-800">
+              <a
+                href="https://github.com/navin87895"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 text-center py-2 text-xs font-bold text-purple-300 bg-purple-950/40 border border-purple-500/40 rounded-xl"
+              >
+                GitHub
+              </a>
+              <Link
+                to="contact"
+                smooth={true}
+                duration={600}
+                offset={-80}
+                onClick={() => setIsOpen(false)}
+                className="flex-1 text-center py-2 text-xs font-bold text-white bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl"
+              >
+                Hire Me
+              </Link>
+            </div>
           </div>
         </div>
       )}
